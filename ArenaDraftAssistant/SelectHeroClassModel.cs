@@ -9,7 +9,7 @@ namespace ArenaDraftAssistant
 {
     class SelectHeroClassModel
     {
-        // TODO add list of HeroClass to back a select box
+        public IList<HeroClass> AllHeroClasses { get; } = HeroClass.AllHeroClasses;
 
         public HeroClass SelectedHeroClass { get; set; }
     }

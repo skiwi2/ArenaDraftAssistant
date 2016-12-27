@@ -6,7 +6,18 @@
              xmlns:local="clr-namespace:ArenaDraftAssistant"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            <Label Content="Test"></Label>
-    </Grid>
+    <UserControl.Resources>
+        <local:HeroClassValueConverter x:Key="HeroClassValueConverter"/>
+    </UserControl.Resources>
+    <StackPanel>
+        <Label Content="Select your Hero Class"></Label>
+        <ComboBox ItemsSource="{Binding Path=AllHeroClasses}" SelectedItem="{Binding Path=SelectedHeroClass, Mode=OneWayToSource}" SelectedIndex="0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource HeroClassValueConverter}}"></TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Content="Continue" Command="{Binding Path=ContinueButtonCommand}"></Button>
+    </StackPanel>
 </UserControl>
