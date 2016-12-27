@@ -24,5 +24,10 @@ namespace ArenaDraftAssistant
         {
             InitializeComponent();
         }
+
+        private void FileQuit_OnClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

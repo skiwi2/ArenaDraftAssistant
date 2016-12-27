@@ -6,7 +6,12 @@
         xmlns:local="clr-namespace:ArenaDraftAssistant"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Quit" Click="FileQuit_OnClick"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel/>
+    </DockPanel>
 </Window>
