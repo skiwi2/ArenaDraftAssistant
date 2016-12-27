@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,15 +16,13 @@ using System.Windows.Shapes;
 namespace ArenaDraftAssistant
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SelectHeroView.xaml
     /// </summary>
-    partial class MainWindow : Window
+    public partial class SelectHeroClassView : UserControl
     {
-        public MainWindow()
+        public SelectHeroClassView()
         {
             InitializeComponent();
         }
-
-        private void FileQuit_OnClick(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
     }
 }
