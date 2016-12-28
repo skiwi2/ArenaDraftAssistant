@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using ArenaDraftAssistant.Model;
 
@@ -26,6 +27,8 @@ namespace ArenaDraftAssistant
                 OnPropertyChanged(nameof(CurrentViewModel));
             }
         }
+
+        public ICommand CloseApplicationCommand => new DelegateCommand(o => Application.Current.Shutdown());
 
         public ICommand LoadArenaDraftPageCommand => new DelegateCommand(parameter => LoadArenaDraftPage(parameter as HeroClass));
 
