@@ -87,6 +87,9 @@
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="HeroClassValueConverter.cs" />
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="ManaCostSelectorControl.xaml.cs">
+      <DependentUpon>ManaCostSelectorControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SelectHeroClassModel.cs" />
     <Compile Include="SelectHeroClassViewModel.cs" />
     <Compile Include="SelectHeroClassView.xaml.cs">
@@ -109,6 +112,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ManaCostSelectorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SelectHeroClassView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

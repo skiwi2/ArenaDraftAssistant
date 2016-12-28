@@ -12,6 +12,14 @@
     <StackPanel>
         <Label Content="Selected Hero Class"/>
         <Label Content="{Binding Path=SelectedHeroClass, Converter={StaticResource HeroClassValueConverter}}"/>
+        <local:ManaCostSelectorControl ManaCost="1"/>
+        <local:ManaCostSelectorControl ManaCost="2"/>
+        <local:ManaCostSelectorControl ManaCost="3"/>
+        <local:ManaCostSelectorControl ManaCost="4"/>
+        <local:ManaCostSelectorControl ManaCost="5"/>
+        <local:ManaCostSelectorControl ManaCost="6"/>
     </StackPanel>
 </UserControl>
+
+
 
