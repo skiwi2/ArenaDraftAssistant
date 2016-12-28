@@ -55,6 +55,10 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=3.15.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.15.0\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.3.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
@@ -90,6 +94,7 @@
     <Compile Include="ManaCostSelectorControl.xaml.cs">
       <DependentUpon>ManaCostSelectorControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\ArenaDraft.cs" />
     <Compile Include="SelectHeroClassModel.cs" />
     <Compile Include="SelectHeroClassViewModel.cs" />
     <Compile Include="SelectHeroClassView.xaml.cs">
