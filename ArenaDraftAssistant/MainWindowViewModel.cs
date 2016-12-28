@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using ArenaDraftAssistant.Model;
 
 namespace ArenaDraftAssistant
 {
@@ -25,6 +27,10 @@ namespace ArenaDraftAssistant
             }
         }
 
+        public ICommand LoadArenaDraftPageCommand => new DelegateCommand(parameter => LoadArenaDraftPage(parameter as HeroClass));
+
         private void LoadSelectHeroClassPage() => CurrentViewModel = new SelectHeroClassViewModel(new SelectHeroClassModel());
+
+        private void LoadArenaDraftPage(HeroClass selectedHeroClass) => CurrentViewModel = new ArenaDraftViewModel(new ArenaDraftModel(selectedHeroClass));
     }
 }

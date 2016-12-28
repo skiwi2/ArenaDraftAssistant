@@ -10,7 +10,5 @@ namespace ArenaDraftAssistant
     class SelectHeroClassModel
     {
         public IList<HeroClass> AllHeroClasses { get; } = HeroClass.AllHeroClasses;
-
-        public HeroClass SelectedHeroClass { get; set; }
     }
 }

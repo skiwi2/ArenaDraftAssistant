@@ -11,13 +11,18 @@
     </UserControl.Resources>
     <StackPanel>
         <Label Content="Select your Hero Class"></Label>
-        <ComboBox ItemsSource="{Binding Path=AllHeroClasses}" SelectedItem="{Binding Path=SelectedHeroClass, Mode=OneWayToSource}" SelectedIndex="0">
+        <ComboBox x:Name="SelectHeroClassComboBox" ItemsSource="{Binding Path=AllHeroClasses}" SelectedIndex="0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Converter={StaticResource HeroClassValueConverter}}"></TextBlock>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button Content="Continue" Command="{Binding Path=ContinueButtonCommand}"></Button>
+        <Button Content="Continue" 
+                Command="{Binding DataContext.LoadArenaDraftPageCommand, RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}, Mode=OneWay}" 
+                CommandParameter="{Binding ElementName=SelectHeroClassComboBox, Path=SelectedItem}"></Button>
     </StackPanel>
 </UserControl>
+
+
+

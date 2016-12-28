@@ -79,6 +79,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ArenaDraftModel.cs" />
+    <Compile Include="ArenaDraftView.xaml.cs">
+      <DependentUpon>ArenaDraftView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArenaDraftViewModel.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="HeroClassValueConverter.cs" />
     <Compile Include="MainWindowViewModel.cs" />
@@ -88,6 +93,10 @@
       <DependentUpon>SelectHeroClassView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModelBase.cs" />
+    <Page Include="ArenaDraftView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

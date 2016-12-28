@@ -10,6 +10,9 @@
         <DataTemplate DataType="{x:Type local:SelectHeroClassViewModel}">
             <local:SelectHeroClassView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ArenaDraftViewModel}">
+            <local:ArenaDraftView/>
+        </DataTemplate>
     </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">

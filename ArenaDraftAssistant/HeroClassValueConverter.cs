@@ -13,8 +13,7 @@ namespace ArenaDraftAssistant
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var heroClass = (HeroClass) value;
-            return heroClass?.Name;
+            return (value as HeroClass)?.Name ?? string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
