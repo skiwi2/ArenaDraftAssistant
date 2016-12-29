@@ -17,7 +17,11 @@ namespace ArenaDraftAssistant
         {
             base.OnStartup(e);
 
-            var window = new MainWindow { DataContext = new MainWindowViewModel() };
+            var window = new MainWindow
+            {
+                DataContext = new MainWindowViewModel(),
+                WindowState = WindowState.Maximized
+            };
             window.Show();
         }
     }

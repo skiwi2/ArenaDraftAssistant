@@ -89,12 +89,14 @@
     </Compile>
     <Compile Include="ArenaDraftViewModel.cs" />
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="DropProbabilityValueConverter.cs" />
     <Compile Include="HeroClassValueConverter.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="ManaCostSelectorControl.xaml.cs">
       <DependentUpon>ManaCostSelectorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ArenaDraft.cs" />
+    <Compile Include="MulliganCardsValueConverter.cs" />
     <Compile Include="SelectHeroClassModel.cs" />
     <Compile Include="SelectHeroClassViewModel.cs" />
     <Compile Include="SelectHeroClassView.xaml.cs">

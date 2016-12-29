@@ -14,7 +14,7 @@
         <ComboBox x:Name="SelectHeroClassComboBox" ItemsSource="{Binding Path=AllHeroClasses}" SelectedIndex="0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Converter={StaticResource HeroClassValueConverter}}"></TextBlock>
+                    <TextBlock Text="{Binding Converter={StaticResource HeroClassValueConverter}}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

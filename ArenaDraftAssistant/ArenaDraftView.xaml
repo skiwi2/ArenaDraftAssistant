@@ -12,12 +12,25 @@
     <StackPanel>
         <Label Content="Selected Hero Class"/>
         <Label Content="{Binding Path=SelectedHeroClass, Converter={StaticResource HeroClassValueConverter}}"/>
-        <local:ManaCostSelectorControl ManaCost="1"/>
-        <local:ManaCostSelectorControl ManaCost="2"/>
-        <local:ManaCostSelectorControl ManaCost="3"/>
-        <local:ManaCostSelectorControl ManaCost="4"/>
-        <local:ManaCostSelectorControl ManaCost="5"/>
-        <local:ManaCostSelectorControl ManaCost="6"/>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type local:ManaCostSelectorControl}">
+                    <Setter Property="Margin" Value="0,0,20,0"/>
+                </Style>
+            </StackPanel.Resources>
+            <local:ManaCostSelectorControl ManaCost="1" DropProbabilitiesForAmount="{Binding Path=DropProbabilitiesForManaCost[0]}" 
+                                           CardsInOpeningHand="3" MaxMulligan="3" DefaultMulligan="3"/>
+            <local:ManaCostSelectorControl ManaCost="2" DropProbabilitiesForAmount="{Binding Path=DropProbabilitiesForManaCost[1]}" 
+                                           CardsInOpeningHand="3" MaxMulligan="3" DefaultMulligan="3"/>
+            <local:ManaCostSelectorControl ManaCost="3" DropProbabilitiesForAmount="{Binding Path=DropProbabilitiesForManaCost[2]}" 
+                                           CardsInOpeningHand="3" MaxMulligan="3" DefaultMulligan="3"/>
+            <local:ManaCostSelectorControl ManaCost="4" DropProbabilitiesForAmount="{Binding Path=DropProbabilitiesForManaCost[3]}" 
+                                           CardsInOpeningHand="3" MaxMulligan="3" DefaultMulligan="3"/>
+            <local:ManaCostSelectorControl ManaCost="5" DropProbabilitiesForAmount="{Binding Path=DropProbabilitiesForManaCost[4]}" 
+                                           CardsInOpeningHand="3" MaxMulligan="3" DefaultMulligan="3"/>
+            <local:ManaCostSelectorControl ManaCost="6" DropProbabilitiesForAmount="{Binding Path=DropProbabilitiesForManaCost[5]}" 
+                                           CardsInOpeningHand="3" MaxMulligan="3" DefaultMulligan="3"/>
+        </StackPanel>
     </StackPanel>
 </UserControl>
 
