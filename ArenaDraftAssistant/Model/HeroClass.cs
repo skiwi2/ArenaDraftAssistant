@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ArenaDraftAssistant.Model
 {
-    class HeroClass
+    public class HeroClass
     {
         public string Name { get; }
 
