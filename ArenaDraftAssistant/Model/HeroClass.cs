@@ -13,7 +13,7 @@ namespace ArenaDraftAssistant.Model
 
         private readonly Lazy<IList<Card>> _allAvailableCards;
 
-        public IList<Card> AllClassCards => _allAvailableCards.Value;
+        public IList<Card> AllAvailableCards => _allAvailableCards.Value;
 
         private HeroClass(string name)
         {
