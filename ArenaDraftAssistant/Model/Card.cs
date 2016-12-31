@@ -37,11 +37,13 @@ namespace ArenaDraftAssistant.Model
             ["NEUTRAL"] = HeroClass.AllHeroClasses
         };
 
-        public IList<HeroClass> HeroClasses { get; private set; }
+        private readonly Lazy<IList<HeroClass>> _heroClasses;
+
+        public IList<HeroClass> HeroClasses => _heroClasses.Value;
 
         public Card()
         {
-            HeroClasses = CalculateHeroClasses();
+            _heroClasses = new Lazy<IList<HeroClass>>(CalculateHeroClasses);
         }
 
         private IList<HeroClass> CalculateHeroClasses()
