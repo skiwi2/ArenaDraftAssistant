@@ -11,20 +11,20 @@ namespace ArenaDraftAssistant.Model
     {
         public string Name { get; }
 
-        private readonly Lazy<IList<Card>> _allAvailableCards;
+        private readonly Lazy<ISet<Card>> _allAvailableCards;
 
-        public IList<Card> AllAvailableCards => _allAvailableCards.Value;
+        public ISet<Card> AllAvailableCards => _allAvailableCards.Value;
 
         private HeroClass(string name)
         {
             Name = name;
 
-            _allAvailableCards = new Lazy<IList<Card>>(CalculateAllAvailableCards);
+            _allAvailableCards = new Lazy<ISet<Card>>(CalculateAllAvailableCards);
         }
 
-        private IList<Card> CalculateAllAvailableCards()
+        private ISet<Card> CalculateAllAvailableCards()
         {
-            return CardList.AllCards.Where(card => card.HeroClasses.Contains(this)).ToImmutableList();
+            return CardDatabase.AllCards.Where(card => card.HeroClasses.Contains(this)).ToImmutableHashSet();
         }
 
         public static HeroClass Druid { get; } = new HeroClass("Druid");
