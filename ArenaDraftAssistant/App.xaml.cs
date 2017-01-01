@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using ArenaDraftAssistant.Model;
 
 namespace ArenaDraftAssistant
 {
@@ -17,11 +16,6 @@ namespace ArenaDraftAssistant
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            foreach (var card in ArenaDraft.AllBannedCards)
-            {
-                Console.WriteLine($"{card.Name}");
-            }
 
             var window = new MainWindow
             {

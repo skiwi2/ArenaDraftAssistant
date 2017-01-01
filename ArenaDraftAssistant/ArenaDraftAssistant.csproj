@@ -118,6 +118,7 @@
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\CardDatabase.cs" />
     <Compile Include="Model\CardRarity.cs" />
+    <Compile Include="Model\CardSet.cs" />
     <Compile Include="Model\CardType.cs" />
     <Compile Include="MulliganCardsValueConverter.cs" />
     <Compile Include="SelectHeroClassModel.cs" />

@@ -29,6 +29,9 @@ namespace ArenaDraftAssistant.Model
         [JsonProperty("rarity")]
         private string Rarity { get; set; }
 
+        [JsonProperty("set")]
+        private string Set { get; set; }
+
         private static IDictionary<string, IList<HeroClass>> StringToHeroClassDictionary { get; } = new Dictionary<string, IList<HeroClass>>
         {
             ["DRUID"] = new List<HeroClass> { HeroClass.Druid },
@@ -72,6 +75,26 @@ namespace ArenaDraftAssistant.Model
 
         public CardRarity CardRarity => _cardRarity.Value;
 
+        private static IDictionary<string, CardSet> StringToCardSetDictionary { get; } = new Dictionary<string, CardSet>
+        {
+            ["PROMO"] = CardSet.Promo,
+            ["REWARD"] = CardSet.Reward,
+            ["CORE"] = CardSet.Basic,
+            ["EXPERT1"] = CardSet.Classic,
+            ["NAXX"] = CardSet.CurseOfNaxxramas,
+            ["GVG"] = CardSet.GoblinsVsGnomes,
+            ["BRM"] = CardSet.BlackrockMountain,
+            ["TGT"] = CardSet.TheGrandTournament,
+            ["LOE"] = CardSet.LeagueOfExplorers,
+            ["OG"] = CardSet.WhispersOfTheOldGods,
+            ["KARA"] = CardSet.OneNightInKarazhan,
+            ["GANGS"] = CardSet.MeanStreetsOfGadgetzan
+        };
+
+        private readonly Lazy<CardSet> _cardSet;
+
+        public CardSet CardSet => _cardSet.Value;
+
         public Card()
         {
             _heroClasses = new Lazy<IList<HeroClass>>(CalculateHeroClasses);
@@ -79,6 +102,8 @@ namespace ArenaDraftAssistant.Model
             _cardType = new Lazy<CardType>(() => StringToCardTypeDictionary[Type]);
 
             _cardRarity = new Lazy<CardRarity>(() => StringToCardRarityDictionary[Rarity]);
+
+            _cardSet = new Lazy<CardSet>(() => StringToCardSetDictionary[Set]);
         }
 
         private IList<HeroClass> CalculateHeroClasses()
