@@ -1,4 +1,7 @@
-﻿namespace ArenaDraftAssistant.Model
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+
+namespace ArenaDraftAssistant.Model
 {
     public class CardSet
     {
@@ -21,5 +24,21 @@
         public static CardSet WhispersOfTheOldGods { get; } = new CardSet("Whispers of the Old Gods");
         public static CardSet OneNightInKarazhan { get; } = new CardSet("One Night in Karazhan");
         public static CardSet MeanStreetsOfGadgetzan { get; } = new CardSet("Mean Streets of Gadgetzan");
+
+        public static IList<CardSet> AllCardSets { get; } = new List<CardSet>
+        {
+            Promo,
+            Reward,
+            Basic,
+            Classic,
+            CurseOfNaxxramas,
+            GoblinsVsGnomes,
+            BlackrockMountain,
+            TheGrandTournament,
+            LeagueOfExplorers,
+            WhispersOfTheOldGods,
+            OneNightInKarazhan,
+            MeanStreetsOfGadgetzan
+        }.ToImmutableList();
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace ArenaDraftAssistant.Model
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+
+namespace ArenaDraftAssistant.Model
 {
     public class CardRarity
     {
@@ -14,5 +17,14 @@
         public static CardRarity Rare { get; } = new CardRarity("Rare");
         public static CardRarity Epic { get; } = new CardRarity("Epic");
         public static CardRarity Legendary { get; } = new CardRarity("Legendary");
+
+        public static IList<CardRarity> AllCardRarities { get; } = new List<CardRarity>
+        {
+            Free,
+            Common,
+            Rare,
+            Epic,
+            Legendary
+        }.ToImmutableList();
     }
 }
