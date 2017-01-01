@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace ArenaDraftAssistant.Model
 {
     class ArenaDraft
     {
-        private static readonly Lazy<ISet<Card>> LazyAllBannedCards = new Lazy<ISet<Card>>(() => new HashSet<Card>
+        public static ISet<Card> AllBannedCards { get; } = new HashSet<Card>
         {
             CardDatabase.GetCardById("EX1_112"),    // Gelbin Mekkatorque
             CardDatabase.GetCardById("PRO_001"),    // Elite Tauren Chieftain
@@ -80,9 +81,7 @@ namespace ArenaDraftAssistant.Model
             CardDatabase.GetCardById("AT_016"),     // Confuse
             CardDatabase.GetCardById("AT_015"),     // Convert
             CardDatabase.GetCardById("CS1_129")     // Inner Fire
-        });
-
-        public static ISet<Card> AllBannedCards => LazyAllBannedCards.Value;
+        }.ToImmutableHashSet();
 
         public static double ProbabilityOfXDropByTurnX(int manaCost, int cardsInOpeningHand, int mulliganAmount, int xDropsInDeck, int cardsInDeck = 30)
         {

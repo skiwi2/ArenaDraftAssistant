@@ -9,9 +9,7 @@ namespace ArenaDraftAssistant.Model
 {
     public class CardDatabase
     {
-        private static readonly Lazy<ISet<Card>> LazyAllCards = new Lazy<ISet<Card>>(InitializeCards);
-
-        public static ISet<Card> AllCards => LazyAllCards.Value;
+        public static ISet<Card> AllCards => InitializeCards();
 
         private static ISet<Card> InitializeCards()
         {
@@ -21,10 +19,7 @@ namespace ArenaDraftAssistant.Model
             }
         }
 
-        private static readonly Lazy<IDictionary<string, Card>> LazyIdToCardDictionary = 
-            new Lazy<IDictionary<string, Card>>(() => AllCards.ToImmutableDictionary(card => card.Id));
-
-        private static IDictionary<string, Card> IdToCardDictionary => LazyIdToCardDictionary.Value;
+        private static IDictionary<string, Card> IdToCardDictionary => AllCards.ToImmutableDictionary(card => card.Id);
 
         public static Card GetCardById(string id) => IdToCardDictionary[id];
     }

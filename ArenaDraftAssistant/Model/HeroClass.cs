@@ -18,7 +18,6 @@ namespace ArenaDraftAssistant.Model
         private HeroClass(string name)
         {
             Name = name;
-
             _allAvailableCards = new Lazy<ISet<Card>>(CalculateAllAvailableCards);
         }
 

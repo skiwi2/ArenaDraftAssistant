@@ -98,11 +98,8 @@ namespace ArenaDraftAssistant.Model
         public Card()
         {
             _heroClasses = new Lazy<IList<HeroClass>>(CalculateHeroClasses);
-
             _cardType = new Lazy<CardType>(() => StringToCardTypeDictionary[Type]);
-
             _cardRarity = new Lazy<CardRarity>(() => StringToCardRarityDictionary[Rarity]);
-
             _cardSet = new Lazy<CardSet>(() => StringToCardSetDictionary[Set]);
         }
 
