@@ -20,5 +20,12 @@ namespace ArenaDraftAssistant.Model
                 return JsonConvert.DeserializeObject<ISet<Card>>(reader.ReadToEnd()).Where(card => card.CardType != CardType.Hero).ToImmutableHashSet();
             }
         }
+
+        private static readonly Lazy<IDictionary<string, Card>> LazyIdToCardDictionary = 
+            new Lazy<IDictionary<string, Card>>(() => AllCards.ToImmutableDictionary(card => card.Id));
+
+        private static IDictionary<string, Card> IdToCardDictionary => LazyIdToCardDictionary.Value;
+
+        public static Card GetCardById(string id) => IdToCardDictionary[id];
     }
 }
