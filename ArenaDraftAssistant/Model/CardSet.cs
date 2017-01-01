@@ -7,17 +7,17 @@
             
         }
 
-        public static readonly CardSet Promo = new CardSet();
-        public static readonly CardSet Reward = new CardSet();
-        public static readonly CardSet Basic = new CardSet();
-        public static readonly CardSet Classic = new CardSet();
-        public static readonly CardSet CurseOfNaxxramas = new CardSet();
-        public static readonly CardSet GoblinsVsGnomes = new CardSet();
-        public static readonly CardSet BlackrockMountain = new CardSet();
-        public static readonly CardSet TheGrandTournament = new CardSet();
-        public static readonly CardSet LeagueOfExplorers = new CardSet();
-        public static readonly CardSet WhispersOfTheOldGods = new CardSet();
-        public static readonly CardSet OneNightInKarazhan = new CardSet();
-        public static readonly CardSet MeanStreetsOfGadgetzan = new CardSet();
+        public static CardSet Promo { get; } = new CardSet();
+        public static CardSet Reward { get; }= new CardSet();
+        public static CardSet Basic { get; }= new CardSet();
+        public static CardSet Classic { get; } = new CardSet();
+        public static CardSet CurseOfNaxxramas { get; } = new CardSet();
+        public static CardSet GoblinsVsGnomes { get; } = new CardSet();
+        public static CardSet BlackrockMountain { get; } = new CardSet();
+        public static CardSet TheGrandTournament { get; } = new CardSet();
+        public static CardSet LeagueOfExplorers { get; } = new CardSet();
+        public static CardSet WhispersOfTheOldGods { get; } = new CardSet();
+        public static CardSet OneNightInKarazhan { get; } = new CardSet();
+        public static CardSet MeanStreetsOfGadgetzan { get; } = new CardSet();
     }
 }

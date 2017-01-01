@@ -7,10 +7,10 @@
             
         }
 
-        public static CardRarity Free = new CardRarity();
-        public static CardRarity Common = new CardRarity();
-        public static CardRarity Rare = new CardRarity();
-        public static CardRarity Epic = new CardRarity();
-        public static CardRarity Legendary = new CardRarity();
+        public static CardRarity Free { get; } = new CardRarity();
+        public static CardRarity Common { get; } = new CardRarity();
+        public static CardRarity Rare { get; } = new CardRarity();
+        public static CardRarity Epic { get; } = new CardRarity();
+        public static CardRarity Legendary { get; } = new CardRarity();
     }
 }

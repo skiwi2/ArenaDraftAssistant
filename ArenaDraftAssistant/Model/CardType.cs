@@ -7,9 +7,9 @@
             
         }
 
-        public static CardType Minion = new CardType();
-        public static CardType Spell = new CardType();
-        public static CardType Weapon = new CardType();
-        public static CardType Hero = new CardType();
+        public static CardType Minion { get; } = new CardType();
+        public static CardType Spell { get; } = new CardType();
+        public static CardType Weapon { get; } = new CardType();
+        public static CardType Hero { get; } = new CardType();
     }
 }
