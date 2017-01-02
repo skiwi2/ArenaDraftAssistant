@@ -139,15 +139,31 @@ namespace ArenaDraftAssistant.Model
 
         private static IDictionary<Card, double> CalculateCardWeightsDictionary(IEnumerable<Card> cards)
         {
-            var modifiers = new List<Func<Card, double>> { ClassCardModifier, TriClassCardModifier };
+            var modifiers = new List<Func<Card, double>>
+            {
+                TriClassCardModifier,
+                ClassCardModifier,
+                NeutralMSGCardModifier,
+                TriClassMSGCardModifier,
+                ClassMSGCardModifier
+            };
             return cards.ToImmutableDictionary(
                 card => card,
                 card => modifiers.Select(modifier => modifier(card)).Aggregate(1d, (a, b) => a * b));
         }
 
-        private static double ClassCardModifier(Card card) => card.HeroClasses.Count == 1 ? 2f : 1f;
+        private static double TriClassCardModifier(Card card) => card.HeroClasses.Count == 3 ? 2d : 1d;
 
-        private static double TriClassCardModifier(Card card) => card.HeroClasses.Count == 3 ? 2f : 1f;
+        private static double ClassCardModifier(Card card) => card.HeroClasses.Count == 1 ? 2d : 1d;
+
+        private static double NeutralMSGCardModifier(Card card)
+            => card.CardSet == CardSet.MeanStreetsOfGadgetzan && card.HeroClasses.Count == 9 ? 2d : 1d;
+
+        private static double TriClassMSGCardModifier(Card card)
+            => card.CardSet == CardSet.MeanStreetsOfGadgetzan && card.HeroClasses.Count == 3 ? 1.8d : 1d;
+
+        private static double ClassMSGCardModifier(Card card)
+            => card.CardSet == CardSet.MeanStreetsOfGadgetzan && card.HeroClasses.Count == 1 ? 1.8d : 1d;
 
         private static double CalculateTotalWeight(IEnumerable<KeyValuePair<Card, double>> weightedKeyValuePairs)
         {
