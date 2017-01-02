@@ -142,7 +142,7 @@ namespace ArenaDraftAssistant
         {
             for (var i = 0; i <= 10; i++)
             {
-                DropProbabilitiesForAmount[i] = new KeyValuePair<int, double>(i, ArenaDraft.ProbabilityOfXDropByTurnX(ManaCost, 3, MulliganAmount, i));
+                DropProbabilitiesForAmount[i] = new KeyValuePair<int, double>(i, ArenaDraft.ProbabilityOfXDropByTurnX(ManaCost, CardsInOpeningHand, MulliganAmount, i));
             }
         }
 
