@@ -99,6 +99,8 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <TextBlock Text="{Binding ElementName=UserControl, Path=NormalPickProbability, StringFormat='{}{0:P2} on normal picks'}"/>
+        <TextBlock Text="{Binding ElementName=UserControl, Path=SpecialPickProbability, StringFormat='{}{0:P2} on special picks'}"/>
     </StackPanel>
 </UserControl>
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using MathNet.Numerics.Distributions;
 
 namespace ArenaDraftAssistant.Model
@@ -119,6 +120,38 @@ namespace ArenaDraftAssistant.Model
             var successInFirstXDrops = 1d - noSuccessInFirstXDrops;
 
             return successInOpeningHand + (noSuccessInOpeningHand * successAfterMulligan) + (noSuccessInOpeningHand * noSuccessAfterMulligan * successInFirstXDrops);
+        }
+
+        public static double ProbabilityOfAtLeastOneOptionConformingPredicate(IEnumerable<Card> cards,
+            Predicate<Card> predicate)
+        {
+            var weights = CalculateCardWeightsDictionary(cards);
+
+            var predicateWeight = CalculateTotalWeight(weights.Where(kp => predicate(kp.Key)));
+            var totalWeight = CalculateTotalWeight(weights);
+
+            var probabilityPerChoice = predicateWeight / totalWeight;
+
+            var noPredicateChoicesInPick = Binomial.PMF(probabilityPerChoice, 3, 0);
+
+            return 1d - noPredicateChoicesInPick;
+        }
+
+        private static IDictionary<Card, double> CalculateCardWeightsDictionary(IEnumerable<Card> cards)
+        {
+            var modifiers = new List<Func<Card, double>> { ClassCardModifier, TriClassCardModifier };
+            return cards.ToImmutableDictionary(
+                card => card,
+                card => modifiers.Select(modifier => modifier(card)).Aggregate(1d, (a, b) => a * b));
+        }
+
+        private static double ClassCardModifier(Card card) => card.HeroClasses.Count == 1 ? 2f : 1f;
+
+        private static double TriClassCardModifier(Card card) => card.HeroClasses.Count == 3 ? 2f : 1f;
+
+        private static double CalculateTotalWeight(IEnumerable<KeyValuePair<Card, double>> weightedKeyValuePairs)
+        {
+            return weightedKeyValuePairs.Select(kp => kp.Value).Aggregate((a, b) => a + b);
         }
     }
 }

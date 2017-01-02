@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -19,6 +20,9 @@ namespace ArenaDraftAssistant
             {
                 CalculateDropProbabilities();
                 OnPropertyChanged(nameof(AvailableMulliganAmounts));
+
+                NormalPickProbability = CalculateNormalPickProbability();
+                SpecialPickProbability = CalculateSpecialPickProbability();
             };
 
             PropertyChanged += (sender, e) =>
@@ -80,6 +84,15 @@ namespace ArenaDraftAssistant
             set { SetValue(DefaultMulliganProperty, value); }
         }
 
+        public static readonly DependencyProperty HeroClassProperty =
+            DependencyProperty.Register(nameof(HeroClass), typeof(HeroClass), typeof(ManaCostSelectorControl));
+
+        public HeroClass HeroClass
+        {
+            get { return (HeroClass) GetValue(HeroClassProperty); }
+            set { SetValue(HeroClassProperty, value); }
+        }
+
         private int _mulliganAmount;
 
         public int MulliganAmount
@@ -89,6 +102,30 @@ namespace ArenaDraftAssistant
             {
                 _mulliganAmount = value;
                 OnPropertyChanged(nameof(MulliganAmount));
+            }
+        }
+
+        private double _normalPickProbability;
+
+        public double NormalPickProbability
+        {
+            get { return _normalPickProbability; }
+            set
+            {
+                _normalPickProbability = value;
+                OnPropertyChanged(nameof(NormalPickProbability));
+            }
+        }
+
+        private double _specialPickProbability;
+
+        public double SpecialPickProbability
+        {
+            get { return _specialPickProbability; }
+            set
+            {
+                _specialPickProbability = value;
+                OnPropertyChanged(nameof(SpecialPickProbability));
             }
         }
 
@@ -107,6 +144,55 @@ namespace ArenaDraftAssistant
             {
                 DropProbabilitiesForAmount[i] = new KeyValuePair<int, double>(i, ArenaDraft.ProbabilityOfXDropByTurnX(ManaCost, 3, MulliganAmount, i));
             }
+        }
+
+        private double CalculateNormalPickProbability()
+        {
+            var draftableCards = ArenaDraft.GetDraftableCardsForHeroClass(HeroClass);
+
+            var commonProbability = ArenaDraft.ProbabilityOfAtLeastOneOptionConformingPredicate(
+                draftableCards.Where(card => card.CardRarity == CardRarity.Free || card.CardRarity == CardRarity.Common), 
+                card => card.ManaCost == ManaCost);
+            var rareProbability = ArenaDraft.ProbabilityOfAtLeastOneOptionConformingPredicate(
+                draftableCards.Where(card => card.CardRarity == CardRarity.Rare),
+                card => card.ManaCost == ManaCost);
+            var epicProbability = ArenaDraft.ProbabilityOfAtLeastOneOptionConformingPredicate(
+                draftableCards.Where(card => card.CardRarity == CardRarity.Epic),
+                card => card.ManaCost == ManaCost);
+            var legendaryProbability = ArenaDraft.ProbabilityOfAtLeastOneOptionConformingPredicate(
+                draftableCards.Where(card => card.CardRarity == CardRarity.Legendary),
+                card => card.ManaCost == ManaCost);
+
+            return CalculatePickProbability(ArenaPickOdds.Normal, commonProbability, rareProbability, epicProbability, legendaryProbability);
+        }
+
+        private double CalculateSpecialPickProbability()
+        {
+            var draftableCards = ArenaDraft.GetDraftableCardsForHeroClass(HeroClass);
+
+            var commonProbability = ArenaDraft.ProbabilityOfAtLeastOneOptionConformingPredicate(
+                draftableCards.Where(card => card.CardRarity == CardRarity.Free || card.CardRarity == CardRarity.Common),
+                card => card.ManaCost == ManaCost);
+            var rareProbability = ArenaDraft.ProbabilityOfAtLeastOneOptionConformingPredicate(
+                draftableCards.Where(card => card.CardRarity == CardRarity.Rare),
+                card => card.ManaCost == ManaCost);
+            var epicProbability = ArenaDraft.ProbabilityOfAtLeastOneOptionConformingPredicate(
+                draftableCards.Where(card => card.CardRarity == CardRarity.Epic),
+                card => card.ManaCost == ManaCost);
+            var legendaryProbability = ArenaDraft.ProbabilityOfAtLeastOneOptionConformingPredicate(
+                draftableCards.Where(card => card.CardRarity == CardRarity.Legendary),
+                card => card.ManaCost == ManaCost);
+
+            return CalculatePickProbability(ArenaPickOdds.Special, commonProbability, rareProbability, epicProbability, legendaryProbability);
+        }
+
+        private double CalculatePickProbability(ArenaPickOdds arenaPickOdds, double commonProbability,
+            double rareProbability, double epicProbability, double legendaryProbability)
+        {
+            return arenaPickOdds.CommonPickProbability * commonProbability +
+                   arenaPickOdds.RarePickProbability * rareProbability +
+                   arenaPickOdds.EpicPickProbability * epicProbability +
+                   arenaPickOdds.LegendaryPickProbability * legendaryProbability;
         }
     }
 }

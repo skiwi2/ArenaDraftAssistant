@@ -115,6 +115,7 @@
       <DependentUpon>ManaCostSelectorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ArenaDraft.cs" />
+    <Compile Include="Model\ArenaPickOdds.cs" />
     <Compile Include="Model\Card.cs" />
     <Compile Include="Model\CardJson.cs" />
     <Compile Include="Model\CardDatabase.cs" />
