@@ -11,19 +11,9 @@ namespace ArenaDraftAssistant.Model
     {
         public string Name { get; }
 
-        private readonly Lazy<ISet<Card>> _allAvailableCards;
-
-        public ISet<Card> AllAvailableCards => _allAvailableCards.Value;
-
         private HeroClass(string name)
         {
             Name = name;
-            _allAvailableCards = new Lazy<ISet<Card>>(CalculateAllAvailableCards);
-        }
-
-        private ISet<Card> CalculateAllAvailableCards()
-        {
-            return CardDatabase.AllCards.Where(card => card.HeroClasses.Contains(this)).ToImmutableHashSet();
         }
 
         public static HeroClass Druid { get; } = new HeroClass("Druid");

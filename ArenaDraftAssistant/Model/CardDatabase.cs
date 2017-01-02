@@ -22,5 +22,12 @@ namespace ArenaDraftAssistant.Model
         private static IDictionary<string, Card> IdToCardDictionary => AllCards.ToImmutableDictionary(card => card.Id);
 
         public static Card GetCardById(string id) => IdToCardDictionary[id];
+
+        private static IDictionary<HeroClass, ISet<Card>> HeroToClassToPlayableCardsDictionary =>
+            HeroClass.AllHeroClasses.ToImmutableDictionary(
+                heroClass => heroClass, 
+                heroClass => (ISet<Card>)AllCards.Where(card => card.HeroClasses.Contains(heroClass)).ToImmutableHashSet());
+
+        public static ISet<Card> GetPlayableCardsForHeroClass(HeroClass heroClass) => HeroToClassToPlayableCardsDictionary[heroClass];
     }
 }
