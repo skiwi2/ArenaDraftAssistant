@@ -14,7 +14,9 @@ namespace ArenaDraftAssistant.Model
         {
             using (var reader = new StreamReader(@"Resources/cards.collectible.json"))
             {
-                return JsonConvert.DeserializeObject<ISet<Card>>(reader.ReadToEnd()).Where(card => card.CardType != CardType.Hero).ToImmutableHashSet();
+                return JsonConvert.DeserializeObject<ISet<CardJson>>(reader.ReadToEnd())
+                    .Select(cardJson => cardJson.ToCard())
+                    .Where(card => card.CardType != CardType.Hero).ToImmutableHashSet();
             }
         }
 
@@ -25,7 +27,7 @@ namespace ArenaDraftAssistant.Model
         private static IDictionary<HeroClass, ISet<Card>> HeroToClassToPlayableCardsDictionary =>
             HeroClass.AllHeroClasses.ToImmutableDictionary(
                 heroClass => heroClass, 
-                heroClass => (ISet<Card>)AllCards.Where(card => card.HeroClasses.Contains(heroClass)).ToImmutableHashSet());
+                heroClass => (ISet<Card>) AllCards.Where(card => card.HeroClasses.Contains(heroClass)).ToImmutableHashSet());
 
         public static ISet<Card> GetPlayableCardsForHeroClass(HeroClass heroClass) => HeroToClassToPlayableCardsDictionary[heroClass];
     }
