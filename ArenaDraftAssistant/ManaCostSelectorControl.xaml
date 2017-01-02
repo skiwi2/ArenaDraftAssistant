@@ -99,8 +99,10 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock Text="{Binding ElementName=UserControl, Path=NormalPickProbability, StringFormat='{}{0:P2} on normal picks'}"/>
-        <TextBlock Text="{Binding ElementName=UserControl, Path=SpecialPickProbability, StringFormat='{}{0:P2} on special picks'}"/>
+        <TextBlock Text="{Binding ElementName=UserControl, Path=NormalPickProbability, StringFormat='{}{0:P2} on normal picks'}"
+                   Visibility="{Binding ElementName=CheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <TextBlock Text="{Binding ElementName=UserControl, Path=SpecialPickProbability, StringFormat='{}{0:P2} on special picks'}"
+                   Visibility="{Binding ElementName=CheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"/>
     </StackPanel>
 </UserControl>
 
