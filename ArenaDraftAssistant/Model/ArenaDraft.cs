@@ -83,6 +83,13 @@ namespace ArenaDraftAssistant.Model
             CardDatabase.GetCardById("CS1_129")     // Inner Fire
         }.ToImmutableHashSet();
 
+        public static ISet<Card> GetDraftableCardsForHeroClass(HeroClass heroClass)
+        {
+            var draftableCards = new HashSet<Card>(CardDatabase.GetPlayableCardsForHeroClass(heroClass));
+            draftableCards.ExceptWith(AllBannedCards);
+            return draftableCards.ToImmutableHashSet();
+        }
+
         public static double ProbabilityOfXDropByTurnX(int manaCost, int cardsInOpeningHand, int mulliganAmount, int xDropsInDeck, int cardsInDeck = 30)
         {
             if (manaCost < 0 || manaCost > 10)

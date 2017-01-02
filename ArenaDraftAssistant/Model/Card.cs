@@ -111,5 +111,23 @@ namespace ArenaDraftAssistant.Model
             }
             return StringToHeroClassDictionary[PlayerClass].ToImmutableList();
         }
+
+        protected bool Equals(Card other)
+        {
+            return string.Equals(Id, other.Id);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Card) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id?.GetHashCode() ?? 0;
+        }
     }
 }
