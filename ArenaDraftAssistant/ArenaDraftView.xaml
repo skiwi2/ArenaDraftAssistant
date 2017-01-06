@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ArenaDraftAssistant"
+             xmlns:tookit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <local:HeroClassValueConverter x:Key="HeroClassValueConverter"/>
+        <local:ArenaDraftPickConverter x:Key="ArenaDraftPickConverter"/>
     </UserControl.Resources>
     <StackPanel>
         <Label Content="Selected Hero Class"/>
@@ -31,6 +33,70 @@
             <local:ManaCostSelectorControl ManaCost="6" DropProbabilitiesForAmount="{Binding Path=DropProbabilitiesForManaCost[5]}" 
                                            CardsInOpeningHand="3" MaxMulligan="3" DefaultMulligan="3" HeroClass="{Binding Path=SelectedHeroClass}"/>
         </StackPanel>
+        <TextBlock Margin="0 10 0 0">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0} / {1} picks">
+                    <Binding Path="Picks.Count"/>
+                    <Binding Path="MaxPicks"/>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel>
+                <TextBlock Text="Card 1" FontWeight="Bold"/>
+                <tookit:AutoCompleteBox
+                    ItemsSource="{Binding Path=DraftableCards}"
+                    SelectedItem="{Binding Path=SelectedCard1, Mode=TwoWay}"
+                    IsTextCompletionEnabled="True"
+                    FilterMode="StartsWith"
+                    ValueMemberPath="Name">
+                    <tookit:AutoCompleteBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </tookit:AutoCompleteBox.ItemTemplate>
+                </tookit:AutoCompleteBox>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Card 2" FontWeight="Bold"/>
+                <tookit:AutoCompleteBox
+                    ItemsSource="{Binding Path=DraftableCards}"
+                    SelectedItem="{Binding Path=SelectedCard2, Mode=TwoWay}"
+                    IsTextCompletionEnabled="True"
+                    FilterMode="StartsWith"
+                    ValueMemberPath="Name">
+                    <tookit:AutoCompleteBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </tookit:AutoCompleteBox.ItemTemplate>
+                </tookit:AutoCompleteBox>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Card 3" FontWeight="Bold"/>
+                <tookit:AutoCompleteBox
+                    ItemsSource="{Binding Path=DraftableCards}"
+                    SelectedItem="{Binding Path=SelectedCard3, Mode=TwoWay}"
+                    IsTextCompletionEnabled="True"
+                    FilterMode="StartsWith"
+                    ValueMemberPath="Name">
+                    <tookit:AutoCompleteBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </tookit:AutoCompleteBox.ItemTemplate>
+                </tookit:AutoCompleteBox>
+            </StackPanel>
+        </StackPanel>
+        <Button Content="Save pick" Command="{Binding SavePickCommand}"/>
+        <TextBlock Text="Selected Picks" FontWeight="Bold" Margin="0 10 0 0"/>
+        <ItemsControl ItemsSource="{Binding Path=Picks}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Converter={StaticResource ArenaDraftPickConverter}}"></TextBlock>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </StackPanel>
 </UserControl>
 

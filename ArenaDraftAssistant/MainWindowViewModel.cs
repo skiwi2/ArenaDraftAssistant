@@ -29,6 +29,6 @@ namespace ArenaDraftAssistant
 
         private void LoadSelectHeroClassPage() => CurrentViewModel = new SelectHeroClassViewModel(new SelectHeroClassModel());
 
-        private void LoadArenaDraftPage(HeroClass selectedHeroClass) => CurrentViewModel = new ArenaDraftViewModel(new ArenaDraftModel(selectedHeroClass));
+        private void LoadArenaDraftPage(HeroClass selectedHeroClass) => CurrentViewModel = new ArenaDraftViewModel(new ArenaDraftModel(selectedHeroClass, 30));
     }
 }
