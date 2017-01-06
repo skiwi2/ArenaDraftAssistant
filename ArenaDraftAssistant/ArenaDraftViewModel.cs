@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using ArenaDraftAssistant.Model;
 
@@ -11,7 +14,12 @@ namespace ArenaDraftAssistant
 
         public ArenaDraftViewModel(ArenaDraftModel model)
         {
+            PropertyChanged += HandlePropertyChanged;
+
             Model = model;
+            DraftableCardsForOption1 = Model.DraftableCards;
+            DraftableCardsForOption2 = Model.DraftableCards;
+            DraftableCardsForOption3 = Model.DraftableCards;
         }
 
         public HeroClass SelectedHeroClass => Model.SelectedHeroClass;
@@ -23,6 +31,42 @@ namespace ArenaDraftAssistant
         public ObservableCollection<ArenaDraftPick> Picks => Model.Picks;
 
         public int MaxPicks => Model.MaxPicks;
+
+        private ObservableCollection<Card> _draftableCardsForOption1;
+
+        public ObservableCollection<Card> DraftableCardsForOption1
+        {
+            get { return _draftableCardsForOption1; }
+            set
+            {
+                _draftableCardsForOption1 = value;
+                OnPropertyChanged(nameof(DraftableCardsForOption1));
+            }
+        }
+
+        private ObservableCollection<Card> _draftableCardsForOption2;
+
+        public ObservableCollection<Card> DraftableCardsForOption2
+        {
+            get { return _draftableCardsForOption2; }
+            set
+            {
+                _draftableCardsForOption2 = value;
+                OnPropertyChanged(nameof(DraftableCardsForOption2));
+            }
+        }
+
+        private ObservableCollection<Card> _draftableCardsForOption3;
+
+        public ObservableCollection<Card> DraftableCardsForOption3
+        {
+            get { return _draftableCardsForOption3; }
+            set
+            {
+                _draftableCardsForOption3 = value;
+                OnPropertyChanged(nameof(DraftableCardsForOption3));
+            }
+        }
 
         private Card _selectedCard1;
 
@@ -114,6 +158,77 @@ namespace ArenaDraftAssistant
             SelectedCard2Text = "";
             SelectedCard3 = null;
             SelectedCard3Text = "";
+        }
+
+        private void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(SelectedCard1) || e.PropertyName == nameof(SelectedCard2) || e.PropertyName == nameof(SelectedCard3))
+            {
+                FilterAllCardOptions();
+            }
+        }
+
+        private void FilterAllCardOptions()
+        {
+            if (SelectedCard1 == null && SelectedCard2 == null && SelectedCard3 == null)
+            {
+                DraftableCardsForOption1 = new ObservableCollection<Card>(DraftableCards);
+                DraftableCardsForOption2 = new ObservableCollection<Card>(DraftableCards);
+                DraftableCardsForOption3 = new ObservableCollection<Card>(DraftableCards);
+            }
+            else if (SelectedCard1 != null && SelectedCard2 == null && SelectedCard3 == null)
+            {
+                DraftableCardsForOption2 = new ObservableCollection<Card>(DraftableCards
+                    .Where(card => card.CardRarity == SelectedCard1.CardRarity)
+                    .Where(card => !Equals(card, SelectedCard1)));
+                DraftableCardsForOption3 = new ObservableCollection<Card>(DraftableCards
+                     .Where(card => card.CardRarity == SelectedCard1.CardRarity)
+                     .Where(card => !Equals(card, SelectedCard1)));
+            }
+            else if (SelectedCard1 == null && SelectedCard2 != null && SelectedCard3 == null)
+            {
+                DraftableCardsForOption1 = new ObservableCollection<Card>(DraftableCards
+                    .Where(card => card.CardRarity == SelectedCard2.CardRarity)
+                    .Where(card => !Equals(card, SelectedCard2)));
+                DraftableCardsForOption3 = new ObservableCollection<Card>(DraftableCards
+                     .Where(card => card.CardRarity == SelectedCard2.CardRarity)
+                     .Where(card => !Equals(card, SelectedCard2)));
+            }
+            else if (SelectedCard1 == null && SelectedCard2 == null && SelectedCard3 != null)
+            {
+                DraftableCardsForOption1 = new ObservableCollection<Card>(DraftableCards
+                    .Where(card => card.CardRarity == SelectedCard3.CardRarity)
+                    .Where(card => !Equals(card, SelectedCard3)));
+                DraftableCardsForOption2 = new ObservableCollection<Card>(DraftableCards
+                     .Where(card => card.CardRarity == SelectedCard3.CardRarity)
+                     .Where(card => !Equals(card, SelectedCard3)));
+            }
+            else if (SelectedCard1 != null && SelectedCard2 != null && SelectedCard3 == null)
+            {
+                DraftableCardsForOption3 = new ObservableCollection<Card>(DraftableCards
+                    .Where(card => card.CardRarity == SelectedCard1.CardRarity)
+                    .Where(card => !Equals(card, SelectedCard1))
+                    .Where(card => !Equals(card, SelectedCard2)));
+            }
+            else if (SelectedCard1 != null && SelectedCard2 == null && SelectedCard3 != null)
+            {
+                DraftableCardsForOption2 = new ObservableCollection<Card>(DraftableCards
+                    .Where(card => card.CardRarity == SelectedCard1.CardRarity)
+                    .Where(card => !Equals(card, SelectedCard1))
+                    .Where(card => !Equals(card, SelectedCard3)));
+            }
+            else if (SelectedCard1 == null && SelectedCard2 != null && SelectedCard3 != null)
+            {
+                DraftableCardsForOption1 = new ObservableCollection<Card>(DraftableCards
+                    .Where(card => card.CardRarity == SelectedCard2.CardRarity)
+                    .Where(card => !Equals(card, SelectedCard2))
+                    .Where(card => !Equals(card, SelectedCard3)));
+            }
+            else if (SelectedCard1 != null && SelectedCard2 != null && SelectedCard3 != null)
+            {
+                // nothing to filter, we have all data already
+                return;
+            }
         }
     }
 }

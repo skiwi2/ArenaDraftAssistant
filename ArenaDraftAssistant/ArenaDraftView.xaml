@@ -47,7 +47,7 @@
             <StackPanel>
                 <TextBlock Text="Card 1" FontWeight="Bold"/>
                 <tookit:AutoCompleteBox
-                    ItemsSource="{Binding Path=DraftableCards}"
+                    ItemsSource="{Binding Path=DraftableCardsForOption1}"
                     SelectedItem="{Binding Path=SelectedCard1, Mode=TwoWay}"
                     Text="{Binding Path=SelectedCard1Text, Mode=TwoWay}"
                     IsTextCompletionEnabled="True"
@@ -68,7 +68,7 @@
             <StackPanel>
                 <TextBlock Text="Card 2" FontWeight="Bold"/>
                 <tookit:AutoCompleteBox
-                    ItemsSource="{Binding Path=DraftableCards}"
+                    ItemsSource="{Binding Path=DraftableCardsForOption2}"
                     SelectedItem="{Binding Path=SelectedCard2, Mode=TwoWay}"
                     Text="{Binding Path=SelectedCard2Text, Mode=TwoWay}"
                     IsTextCompletionEnabled="True"
@@ -89,7 +89,7 @@
             <StackPanel>
                 <TextBlock Text="Card 3" FontWeight="Bold"/>
                 <tookit:AutoCompleteBox
-                    ItemsSource="{Binding Path=DraftableCards}"
+                    ItemsSource="{Binding Path=DraftableCardsForOption3}"
                     SelectedItem="{Binding Path=SelectedCard3, Mode=TwoWay}"
                     Text="{Binding Path=SelectedCard3Text, Mode=TwoWay}"
                     IsTextCompletionEnabled="True"
