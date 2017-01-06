@@ -142,7 +142,7 @@ namespace ArenaDraftAssistant
 
         public ICommand SavePickCommand => new DelegateCommand(selectedOption =>
         {
-            if (Picks.Count == 30)
+            if (Picks.Count == 30 || SelectedCard1 == null || SelectedCard2 == null || SelectedCard3 == null)
             {
                 return;
             }
