@@ -115,11 +115,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ArenaDraftModel.cs" />
-    <Compile Include="ArenaDraftPickConverter.cs" />
+    <Compile Include="ArenaDraftPickValueConverter.cs" />
     <Compile Include="ArenaDraftView.xaml.cs">
       <DependentUpon>ArenaDraftView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ArenaDraftViewModel.cs" />
+    <Compile Include="CardValueConverter.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="DropProbabilityValueConverter.cs" />
     <Compile Include="HeroClassValueConverter.cs" />

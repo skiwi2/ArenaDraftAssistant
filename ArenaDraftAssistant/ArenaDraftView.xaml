@@ -4,12 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ArenaDraftAssistant"
+             xmlns:localmodel="clr-namespace:ArenaDraftAssistant.Model"
              xmlns:tookit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <local:HeroClassValueConverter x:Key="HeroClassValueConverter"/>
-        <local:ArenaDraftPickConverter x:Key="ArenaDraftPickConverter"/>
+        <local:ArenaDraftPickValueConverter x:Key="ArenaDraftPickValueConverter"/>
+        <local:CardValueConverter x:Key="CardValueConverter"/>
     </UserControl.Resources>
     <StackPanel>
         <Label Content="Selected Hero Class"/>
@@ -52,10 +54,15 @@
                     ValueMemberPath="Name">
                     <tookit:AutoCompleteBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
+                            <TextBlock Text="{Binding Name}"/>
                         </DataTemplate>
                     </tookit:AutoCompleteBox.ItemTemplate>
                 </tookit:AutoCompleteBox>
+                <TextBlock Text="{Binding SelectedCard1, Converter={StaticResource CardValueConverter}}" Cursor="Hand">
+                    <TextBlock.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding Path=SavePickCommand}" CommandParameter="{x:Static localmodel:ArenaDraftPickOption.One}"/>
+                    </TextBlock.InputBindings>
+                </TextBlock>
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="Card 2" FontWeight="Bold"/>
@@ -71,6 +78,11 @@
                         </DataTemplate>
                     </tookit:AutoCompleteBox.ItemTemplate>
                 </tookit:AutoCompleteBox>
+                <TextBlock Text="{Binding SelectedCard2, Converter={StaticResource CardValueConverter}}" Cursor="Hand">
+                    <TextBlock.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding Path=SavePickCommand}" CommandParameter="{x:Static localmodel:ArenaDraftPickOption.Two}"/>
+                    </TextBlock.InputBindings>
+                </TextBlock>
             </StackPanel>
             <StackPanel>
                 <TextBlock Text="Card 3" FontWeight="Bold"/>
@@ -86,14 +98,18 @@
                         </DataTemplate>
                     </tookit:AutoCompleteBox.ItemTemplate>
                 </tookit:AutoCompleteBox>
+                <TextBlock Text="{Binding SelectedCard3, Converter={StaticResource CardValueConverter}}" Cursor="Hand">
+                    <TextBlock.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding Path=SavePickCommand}" CommandParameter="{x:Static localmodel:ArenaDraftPickOption.Three}"/>
+                    </TextBlock.InputBindings>
+                </TextBlock>
             </StackPanel>
         </StackPanel>
-        <Button Content="Save pick" Command="{Binding SavePickCommand}"/>
         <TextBlock Text="Selected Picks" FontWeight="Bold" Margin="0 10 0 0"/>
         <ItemsControl ItemsSource="{Binding Path=Picks}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Converter={StaticResource ArenaDraftPickConverter}}"></TextBlock>
+                    <TextBlock Text="{Binding Converter={StaticResource ArenaDraftPickValueConverter}}"></TextBlock>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
