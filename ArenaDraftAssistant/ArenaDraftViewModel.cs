@@ -36,6 +36,18 @@ namespace ArenaDraftAssistant
             }
         }
 
+        private string _selectedCard1Text;
+
+        public string SelectedCard1Text
+        {
+            get { return _selectedCard1Text; }
+            set
+            {
+                _selectedCard1Text = value;
+                OnPropertyChanged(nameof(SelectedCard1Text));
+            }
+        }
+
         private Card _selectedCard2;
 
         public Card SelectedCard2
@@ -45,6 +57,18 @@ namespace ArenaDraftAssistant
             {
                 _selectedCard2 = value;
                 OnPropertyChanged(nameof(SelectedCard2));
+            }
+        }
+
+        private string _selectedCard2Text;
+
+        public string SelectedCard2Text
+        {
+            get { return _selectedCard2Text; }
+            set
+            {
+                _selectedCard2Text = value;
+                OnPropertyChanged(nameof(SelectedCard2Text));
             }
         }
 
@@ -60,6 +84,18 @@ namespace ArenaDraftAssistant
             }
         }
 
+        private string _selectedCard3Text;
+
+        public string SelectedCard3Text
+        {
+            get { return _selectedCard3Text; }
+            set
+            {
+                _selectedCard3Text = value;
+                OnPropertyChanged(nameof(SelectedCard3Text));
+            }
+        }
+
         public ICommand SavePickCommand => new DelegateCommand(selectedOption =>
         {
             if (Picks.Count == 30)
@@ -67,6 +103,17 @@ namespace ArenaDraftAssistant
                 return;
             }
             Picks.Add(new ArenaDraftPick(SelectedCard1, SelectedCard2, SelectedCard3, (ArenaDraftPickOption) selectedOption));
+            InitializeAutoCompleteBoxes();
         });
+
+        private void InitializeAutoCompleteBoxes()
+        {
+            SelectedCard1 = null;
+            SelectedCard1Text = "";
+            SelectedCard2 = null;
+            SelectedCard2Text = "";
+            SelectedCard3 = null;
+            SelectedCard3Text = "";
+        }
     }
 }

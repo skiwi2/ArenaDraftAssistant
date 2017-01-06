@@ -49,6 +49,7 @@
                 <tookit:AutoCompleteBox
                     ItemsSource="{Binding Path=DraftableCards}"
                     SelectedItem="{Binding Path=SelectedCard1, Mode=TwoWay}"
+                    Text="{Binding Path=SelectedCard1Text, Mode=TwoWay}"
                     IsTextCompletionEnabled="True"
                     FilterMode="StartsWith"
                     ValueMemberPath="Name">
@@ -69,6 +70,7 @@
                 <tookit:AutoCompleteBox
                     ItemsSource="{Binding Path=DraftableCards}"
                     SelectedItem="{Binding Path=SelectedCard2, Mode=TwoWay}"
+                    Text="{Binding Path=SelectedCard2Text, Mode=TwoWay}"
                     IsTextCompletionEnabled="True"
                     FilterMode="StartsWith"
                     ValueMemberPath="Name">
@@ -89,6 +91,7 @@
                 <tookit:AutoCompleteBox
                     ItemsSource="{Binding Path=DraftableCards}"
                     SelectedItem="{Binding Path=SelectedCard3, Mode=TwoWay}"
+                    Text="{Binding Path=SelectedCard3Text, Mode=TwoWay}"
                     IsTextCompletionEnabled="True"
                     FilterMode="StartsWith"
                     ValueMemberPath="Name">
